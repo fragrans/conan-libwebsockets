@@ -7,7 +7,7 @@ from conans import ConanFile, CMake, tools
 
 class LibwebsocketsConan(ConanFile):
     name = "libwebsockets"
-    version = "3.2.0"
+    version = "2.4.0"
     description = "Canonical libwebsockets.org websocket library"
     url = "https://github.com/bincrafters/conan-libwebsockets"
     homepage = "https://github.com/warmcat/libwebsockets"
@@ -61,7 +61,7 @@ class LibwebsocketsConan(ConanFile):
             self.requires.add("openssl/1.0.2t")
 
     def source(self):
-        sha256 = "5e731c536a20d9c03ae611631db073f05cd77bf0906a8c30d2a13638d4c8c667"
+        sha256 = "0dc355c1f9a660b98667cc616fa4c4fe08dacdaeff2d5cc9f74e49e9d4af2d95"
         tools.get("{0}/archive/v{1}.tar.gz".format(self.homepage, self.version), sha256=sha256)
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, self._source_subfolder)
@@ -79,7 +79,7 @@ class LibwebsocketsConan(ConanFile):
         if not self.options.lws_with_zlib:
             cmake.definitions["LWS_WITHOUT_EXTENSIONS"] = True
             cmake.definitions["LWS_WITH_ZIP_FOPS"] = False
-
+            
         if not self.options.shared and self.settings.os != "Windows":
             cmake.definitions["LWS_STATIC_PIC"] = self.options.fPIC
 
